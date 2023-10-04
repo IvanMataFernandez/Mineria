@@ -2,7 +2,6 @@ package mineria;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,6 +33,9 @@ public class ConvertidorDeDatos {
 		//        - Cantidad de mensajes por label, por lenguaje
 
 
+		// Ayudas sacadas de -> https://www.javatpoint.com/how-to-read-csv-file-in-java (leer de CSV)
+		//                      https://www.geeksforgeeks.org/writing-a-csv-file-in-java-using-opencsv/ (escribir a CSV)
+		
 		
 		try {
 			
@@ -107,6 +109,10 @@ public class ConvertidorDeDatos {
 					lineaDeInteres[0] = apartados[4];
 				}
 				
+				// Tokenizar el texto
+				
+				lineaDeInteres[0] = this.tokenizar(lineaDeInteres[0]); 			
+				
 				// El segundo campo a recoger es el label puesto en el experimento, este siempre es el ultimo campo
 				
 				lineaDeInteres[1] = apartados[apartados.length-1];
@@ -125,7 +131,7 @@ public class ConvertidorDeDatos {
 				
 				if (idioma.contentEquals("es")) {
 					escEs.writeNext(lineaDeInteres);
-					System.out.println("En Español -> "+lineaDeInteres[0]+" | "+lineaDeInteres[1]);
+				//	System.out.println("En Español -> "+lineaDeInteres[0]+" | "+lineaDeInteres[1]);
 					
 					
 					numPalabrasEsp.add(lineaDeInteres[0].split(" ").length);
@@ -258,6 +264,88 @@ public class ConvertidorDeDatos {
 		
 		
 	}
+	
+	
+	private String tokenizar (String frase) {
+		
+		/*
+		  Pre: String
+		  Post: La string recibe las siguientes modificaciones: 
+		 
+		  - Pasar a minuscula
+		  - Eliminar palabras que empiecen @ o #
+		  - Eliminar enlaces http / https
+		  - Eliminar puntuacion y otros simbolos como emojis
+		  - Respecto a comillas, manternerlas si hay texto a ambos lados de ella (como "it's" por ejemplo), pero
+		    quitarlas si no hay texto al menos en uno de sus lados (como "hola 'Ivan'" pasa a "hola Ivan")
+		  - Quitar tildes
+		  - Arreglar espacios a solo uno por palabra 
+		  
+		  
+		 */
+		String s = frase;
+
+		s = s.replaceAll("@\\S*", "");     // Quitar menciones
+		s = s.replaceAll("#\\S*", "");     // Quitar hashtags de otros posts
+		s = s.replaceAll("http:\\S*", ""); // Quitar enlaces http
+		s = s.replaceAll("https:\\S*", ""); // Quitar enlaces https
+		s = s.replaceAll("[^\\p{L}\\p{M}\\p{N}\\p{P}\\p{Z}\\p{Cf}\\p{Cs}\\s]",""); // Eliminar caracteres raros como emojis. Fuente: https://stackoverflow.com/questions/49510006/remove-and-other-such-emojis-images-signs-from-java-strings  (mejor respuesta)
+		s = s.replace('[', ' '); // Quitar puntuacion
+		s = s.replace(']', ' ');
+		s = s.replace('"', ' '); 
+		s = s.replace('.', ' ');
+		s = s.replace(',', ' ');
+		s = s.replace(';', ' ');
+		s = s.replace(':', ' ');
+		s = s.replace('(', ' ');
+		s = s.replace(')', ' ');
+		s = s.replace('{', ' ');
+		s = s.replace('}', ' ');
+		s = s.replace('?', ' ');
+		s = s.replace('¿', ' ');
+		s = s.replace('!', ' ');
+		s = s.replace('¡', ' ');
+		s = s.replace('“', ' ');
+		s = s.replace('”', ' ');
+		s = s.replace('/', ' ');
+		s = s.replace('━', ' ');
+		s = s.replace('|', ' ');
+		s = s.replace('-', ' ');
+		s = s.replace('❝', ' ');
+		s = s.replace('❞', ' ');
+		s = s.replace('=', ' ');
+		s = s.replace('$', ' ');
+		s = s.replace('€', ' ');
+		s = s.replace('%', ' ');
+		s = s.replace('+', ' ');
+		s = s.replace('*', ' ');
+		s = s.replace('&', ' '); 
+//		s = s.replace("[.,;:(){}?¿!¡“”/━|-❝❞=$€%+*&]", " ");
+				
+		s = s.replaceAll("’", "'"); // La lógica de lo de las comillas
+		s = s.replaceAll("\\S'[^\\S]", " ");
+		s = s.replaceAll("[^\\S]'\\S", " ");
+
+
+
+
+		s = s.replaceAll("\\s+", " "); // Sustituir >1 espacios seguidos por un único espacio
+		s = s.replaceAll("^\\S*", ""); // Quitar los espacios al principio del string
+		
+		s = s.toLowerCase(); // Pasar a minuscula
+		
+		// Quitar tildes
+		
+		s = s.replace('á', 'a');
+		s = s.replace('é', 'e');
+		s = s.replace('í', 'i');
+		s = s.replace('ó', 'o');
+		s = s.replace('ú', 'u');
+		
+		return s;
+		
+	}
+	
 	
 	private void imprimirLista (Integer[] lista) {
 		

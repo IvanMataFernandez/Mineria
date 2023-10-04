@@ -9,9 +9,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import org.deeplearning4j.models.word2vec.Word2Vec;
-import org.deeplearning4j.text.sentenceiterator.BasicLineIterator;
+import org.deeplearning4j.text.sentenceiterator.SentenceIterator;
 import org.deeplearning4j.text.tokenization.tokenizer.preprocessor.CommonPreprocessor;
+import org.deeplearning4j.models.word2vec.Word2Vec;
+import org.deeplearning4j.text.sentenceiterator.LineSentenceIterator;
+import org.deeplearning4j.text.tokenization.tokenizerfactory.TokenizerFactory;
+import org.nd4j.linalg.factory.Nd4j;
+import org.deeplearning4j.text.tokenization.tokenizerfactory.DefaultTokenizerFactory;
 
 import au.com.bytecode.opencsv.CSVWriter;
 
@@ -403,18 +407,19 @@ public class ConvertidorDeDatos {
 		lista.add("below");
 		lista.add("between");
 
-		
 
 		
 
 		
 	//	try {
-		SentenceIterator iter = new LineSentenceIterator(new File("/your/absolute/file/path/here.txt"));	
+		
+
+		SentenceIterator iter = new LineSentenceIterator(new File("./datos/trainEsp.csv"));	
 			TokenizerFactory t = new DefaultTokenizerFactory();
 			t.setTokenPreProcessor(new CommonPreprocessor());
 			
 			System.out.println("entrenando");
-		/*	
+			
 			Word2Vec vec = new Word2Vec.Builder()
 			        .minWordFrequency(5)
 			        .layerSize(100)
@@ -425,12 +430,11 @@ public class ConvertidorDeDatos {
 			        .stopWords(lista)
 			        .build();
 
-			vec.fit(); */
-			
-			System.out.println("entrenado");
+			vec.fit(); 
 			
 			
-	//		System.out.println(vec.indexOf("mujer"));
+			
+			System.out.println(vec.indexOf("mujer"));
 			
 	//	} catch (FileNotFoundException e) {
 	//		e.printStackTrace();

@@ -9,6 +9,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import org.deeplearning4j.models.word2vec.Word2Vec;
+import org.deeplearning4j.text.sentenceiterator.BasicLineIterator;
+import org.deeplearning4j.text.tokenization.tokenizer.preprocessor.CommonPreprocessor;
+
 import au.com.bytecode.opencsv.CSVWriter;
 
 public class ConvertidorDeDatos {
@@ -131,7 +135,7 @@ public class ConvertidorDeDatos {
 				
 				if (idioma.contentEquals("es")) {
 					escEs.writeNext(lineaDeInteres);
-				//	System.out.println("En Español -> "+lineaDeInteres[0]+" | "+lineaDeInteres[1]);
+					System.out.println("En Español -> "+lineaDeInteres[0]+" | "+lineaDeInteres[1]);
 					
 					
 					numPalabrasEsp.add(lineaDeInteres[0].split(" ").length);
@@ -282,6 +286,9 @@ public class ConvertidorDeDatos {
 		  - Arreglar espacios a solo uno por palabra 
 		  
 		  
+		  
+		  Nota: El paso de quitar las stopwords se hace durante el word embedding
+		  
 		 */
 		String s = frase;
 
@@ -359,6 +366,75 @@ public class ConvertidorDeDatos {
 		}
 		
 		System.out.println("]");
+
+	}
+	
+	public void wordEmbedding() {
+		
+		//https://deeplearning4j.konduit.ai/v/en-1.0.0-beta6/language-processing/word2vec#just-give-me-the-code
+		
+		ArrayList<String> lista = new ArrayList<String>();
+		
+		
+		// TODO: AÑADIR STOPWORDS ESPAÑOLAS
+		// E INGLESAS AQUI, 
+		// REFERENCIA: https://www.ranks.nl/stopwords
+		
+		lista.add("a");
+		lista.add("about");
+		lista.add("above");
+		lista.add("after");
+		lista.add("again");
+		lista.add("against");
+		lista.add("all");
+		lista.add("am");
+		lista.add("an");
+		lista.add("and");
+		lista.add("any");
+		lista.add("are");
+		lista.add("aren't");
+		lista.add("as");
+		lista.add("at");
+		lista.add("be");
+		lista.add("because");
+		lista.add("been");
+		lista.add("before");
+		lista.add("being");
+		lista.add("below");
+		lista.add("between");
+
+		
+
+		
+
+		
+	//	try {
+		SentenceIterator iter = new LineSentenceIterator(new File("/your/absolute/file/path/here.txt"));	
+			TokenizerFactory t = new DefaultTokenizerFactory();
+			t.setTokenPreProcessor(new CommonPreprocessor());
+			
+			System.out.println("entrenando");
+		/*	
+			Word2Vec vec = new Word2Vec.Builder()
+			        .minWordFrequency(5)
+			        .layerSize(100)
+			        .seed(42)
+			        .windowSize(5)
+			        .iterate(iter)
+			        .tokenizerFactory(t)
+			        .stopWords(lista)
+			        .build();
+
+			vec.fit(); */
+			
+			System.out.println("entrenado");
+			
+			
+	//		System.out.println(vec.indexOf("mujer"));
+			
+	//	} catch (FileNotFoundException e) {
+	//		e.printStackTrace();
+	//	}
 
 	}
 	

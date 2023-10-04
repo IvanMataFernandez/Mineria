@@ -6,15 +6,8 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/Elsab/Desktop/repoMin/Mineria/lib/weka-stable-3.8.6.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Elsab/Desktop/repoMin/Mineria/lib/opencsv-2.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Elsab/Desktop/repoMin/Mineria/lib/deeplearning4j-core-1.0.0-M2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Elsab/Desktop/repoMin/Mineria/lib/deeplearning4j-datasets-1.0.0-M2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Elsab/Desktop/repoMin/Mineria/lib/deeplearning4j-datavec-iterators-1.0.0-M2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Elsab/Desktop/repoMin/Mineria/lib/deeplearning4j-modelimport-1.0.0-M2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Elsab/Desktop/repoMin/Mineria/lib/deeplearning4j-nn-1.0.0-M2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Elsab/Desktop/repoMin/Mineria/lib/deeplearning4j-ui-components-1.0.0-M2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Elsab/Desktop/repoMin/Mineria/lib/deeplearning4j-utility-iterators-1.0.0-M2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Elsab/Desktop/repoMin/Mineria/lib/deeplearning4j-nlp-1.0.0-M2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Elsab/Desktop/repoMin/Mineria/lib/weka-stable-3.8.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Elsab/Desktop/repoMin/Mineria/lib/deeplearning4j-nlp-0.8.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

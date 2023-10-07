@@ -22,8 +22,374 @@ import au.com.bytecode.opencsv.CSVWriter;
 public class ConvertidorDeDatos {
 
 	private static ConvertidorDeDatos c;
+	private ArrayList<String> lista; // Stopword list (Eng)
+	private ArrayList<String> lista2; // Stopword list (Esp)
 	
-	private ConvertidorDeDatos() {}
+	
+	private ConvertidorDeDatos() {
+		this.lista = new ArrayList<String>();
+		this.lista2 = new ArrayList<String>();
+		
+
+		
+		    lista.add("a");
+	        lista.add("about");
+	        lista.add("above");
+	        lista.add("after");
+	        lista.add("again");
+	        lista.add("against");
+	        lista.add("all");
+	        lista.add("am");
+	        lista.add("an");
+	        lista.add("and");
+	        lista.add("any");
+	        lista.add("are");
+	        lista.add("aren't");
+	        lista.add("as");
+	        lista.add("at");
+	        lista.add("be");
+	        lista.add("because");
+	        lista.add("been");
+	        lista.add("before");
+	        lista.add("being");
+	        lista.add("below");
+	        lista.add("between");
+	        lista.add("both");
+	        lista.add("but");
+	        lista.add("by");
+	        lista.add("can");
+	        lista.add("can't");
+	        lista.add("cannot");
+	        lista.add("could");
+	        lista.add("couldn't");
+	        lista.add("did");
+	        lista.add("didn't");
+	        lista.add("do");
+	        lista.add("does");
+	        lista.add("doesn't");
+	        lista.add("doing");
+	        lista.add("don't");
+	        lista.add("down");
+	        lista.add("during");
+	        lista.add("each");
+	        lista.add("few");
+	        lista.add("for");
+	        lista.add("from");
+	        lista.add("further");
+	        lista.add("had");
+	        lista.add("hadn't");
+	        lista.add("has");
+	        lista.add("hasn't");
+	        lista.add("have");
+	        lista.add("haven't");
+	        lista.add("having");
+	        lista.add("he");
+	        lista.add("he'd");
+	        lista.add("he'll");
+	        lista.add("he's");
+	        lista.add("her");
+	        lista.add("here");
+	        lista.add("here's");
+	        lista.add("hers");
+	        lista.add("herself");
+	        lista.add("him");
+	        lista.add("himself");
+	        lista.add("his");
+	        lista.add("how");
+	        lista.add("how's");
+	        lista.add("i");
+	        lista.add("i'd");
+	        lista.add("i'll");
+	        lista.add("i'm");
+	        lista.add("i've");
+	        lista.add("if");
+	        lista.add("in");
+	        lista.add("into");
+	        lista.add("is");
+	        lista.add("isn't");
+	        lista.add("it");
+	        lista.add("it's");
+	        lista.add("its");
+	        lista.add("itself");
+	        lista.add("let's");
+	        lista.add("me");
+	        lista.add("more");
+	        lista.add("most");
+	        lista.add("mustn't");
+	        lista.add("my");
+	        lista.add("myself");
+	        lista.add("no");
+	        lista.add("nor");
+	        lista.add("not");
+	        lista.add("of");
+	        lista.add("off");
+	        lista.add("on");
+	        lista.add("once");
+	        lista.add("only");
+	        lista.add("or");
+	        lista.add("other");
+	        lista.add("ought");
+	        lista.add("our");
+	        lista.add("ours");
+	        lista.add("ourselves");
+	        lista.add("out");
+	        lista.add("over");
+	        lista.add("own");
+	        lista.add("same");
+	        lista.add("shan't");
+	        lista.add("she");
+	        lista.add("she'd");
+	        lista.add("she'll");
+	        lista.add("she's");
+	        lista.add("should");
+	        lista.add("shouldn't");
+	        lista.add("so");
+	        lista.add("some");
+	        lista.add("such");
+	        lista.add("than");
+	        lista.add("that");
+	        lista.add("that's");
+	        lista.add("the");
+	        lista.add("their");
+	        lista.add("theirs");
+	        lista.add("them");
+	        lista.add("themselves");
+	        lista.add("then");
+	        lista.add("there");
+	        lista.add("there's");
+	        lista.add("these");
+	        lista.add("they");
+	        lista.add("they'd");
+	        lista.add("they'll");
+	        lista.add("they're");
+	        lista.add("they've");
+	        lista.add("this");
+	        lista.add("those");
+	        lista.add("through");
+	        lista.add("to");
+	        lista.add("too");
+	        lista.add("under");
+	        lista.add("until");
+	        lista.add("up");
+	        lista.add("very");
+	        lista.add("was");
+	        lista.add("wasn't");
+	        lista.add("we");
+	        lista.add("we'd");
+	        lista.add("we'll");
+	        lista.add("we're");
+	        lista.add("we've");
+	        lista.add("were");
+	        lista.add("weren't");
+	        lista.add("what");
+	        lista.add("what's");
+	        lista.add("when");
+	        lista.add("when's");
+	        lista.add("where");
+	        lista.add("where's");
+	        lista.add("which");
+	        lista.add("while");
+	        lista.add("who");
+	        lista.add("who's");
+	        lista.add("whom");
+	        lista.add("why");
+	        lista.add("why's");
+	        lista.add("with");
+	        lista.add("won't");
+	        lista.add("would");
+	        lista.add("wouldn't");
+	        lista.add("you");
+	        lista.add("you'd");
+	        lista.add("you'll");
+	        lista.add("you're");
+	        lista.add("you've");
+	        lista.add("your");
+	        lista.add("yours");
+	        lista.add("yourself");
+	        lista.add("yourselves");
+		
+	      
+	        lista2.add("un");
+	        lista2.add("una");
+	        lista2.add("unas");
+	        lista2.add("unos");
+	        lista2.add("uno");
+	        lista2.add("sobre");
+	        lista2.add("todo");
+	        lista2.add("también");
+	        lista2.add("tras");
+	        lista2.add("otro");
+	        lista2.add("algún");
+	        lista2.add("alguno");
+	        lista2.add("alguna");
+	        lista2.add("algunos");
+	        lista2.add("algunas");
+	        lista2.add("ser");
+	        lista2.add("es");
+	        lista2.add("soy");
+	        lista2.add("eres");
+	        lista2.add("somos");
+	        lista2.add("sois");
+	        lista2.add("estoy");
+	        lista2.add("esta");
+	        lista2.add("estamos");
+	        lista2.add("estais");
+	        lista2.add("estan");
+	        lista2.add("como");
+	        lista2.add("en");
+	        lista2.add("para");
+	        lista2.add("atras");
+	        lista2.add("porque");
+	        lista2.add("por qué");
+	        lista2.add("estado");
+	        lista2.add("estaba");
+	        lista2.add("ante");
+	        lista2.add("antes");
+	        lista2.add("siendo");
+	        lista2.add("ambos");
+	        lista2.add("pero");
+	        lista2.add("por");
+	        lista2.add("poder");
+	        lista2.add("puede");
+	        lista2.add("puedo");
+	        lista2.add("podemos");
+	        lista2.add("podeis");
+	        lista2.add("pueden");
+	        lista2.add("fui");
+	        lista2.add("fue");
+	        lista2.add("fuimos");
+	        lista2.add("fueron");
+	        lista2.add("hacer");
+	        lista2.add("hago");
+	        lista2.add("hace");
+	        lista2.add("hacemos");
+	        lista2.add("haceis");
+	        lista2.add("hacen");
+	        lista2.add("cada");
+	        lista2.add("fin");
+	        lista2.add("incluso");
+	        lista2.add("primero");
+	        lista2.add("desde");
+	        lista2.add("conseguir");
+	        lista2.add("consigo");
+	        lista2.add("consigue");
+	        lista2.add("consigues");
+	        lista2.add("conseguimos");
+	        lista2.add("consiguen");
+	        lista2.add("ir");
+	        lista2.add("voy");
+	        lista2.add("va");
+	        lista2.add("vamos");
+	        lista2.add("vais");
+	        lista2.add("van");
+	        lista2.add("vaya");
+	        lista2.add("gueno");
+	        lista2.add("ha");
+	        lista2.add("tener");
+	        lista2.add("tengo");
+	        lista2.add("tiene");
+	        lista2.add("tenemos");
+	        lista2.add("teneis");
+	        lista2.add("tienen");
+	        lista2.add("el");
+	        lista2.add("la");
+	        lista2.add("lo");
+	        lista2.add("las");
+	        lista2.add("los");
+	        lista2.add("su");
+	        lista2.add("aqui");
+	        lista2.add("mio");
+	        lista2.add("tuyo");
+	        lista2.add("ellos");
+	        lista2.add("ellas");
+	        lista2.add("nos");
+	        lista2.add("nosotros");
+	        lista2.add("vosotros");
+	        lista2.add("vosotras");
+	        lista2.add("si");
+	        lista2.add("dentro");
+	        lista2.add("solo");
+	        lista2.add("solamente");
+	        lista2.add("saber");
+	        lista2.add("sabes");
+	        lista2.add("sabe");
+	        lista2.add("sabemos");
+	        lista2.add("sabeis");
+	        lista2.add("saben");
+	        lista2.add("ultimo");
+	        lista2.add("largo");
+	        lista2.add("bastante");
+	        lista2.add("haces");
+	        lista2.add("muchos");
+	        lista2.add("aquellos");
+	        lista2.add("aquellas");
+	        lista2.add("sus");
+	        lista2.add("entonces");
+	        lista2.add("tiempo");
+	        lista2.add("verdad");
+	        lista2.add("verdadero");
+	        lista2.add("verdadera");
+	        lista2.add("cierto");
+	        lista2.add("ciertos");
+	        lista2.add("cierta");
+	        lista2.add("ciertas");
+	        lista2.add("intentar");
+	        lista2.add("intento");
+	        lista2.add("intenta");
+	        lista2.add("intentas");
+	        lista2.add("intentamos");
+	        lista2.add("intentais");
+	        lista2.add("intentan");
+	        lista2.add("dos");
+	        lista2.add("bajo");
+	        lista2.add("arriba");
+	        lista2.add("encima");
+	        lista2.add("usar");
+	        lista2.add("uso");
+	        lista2.add("usas");
+	        lista2.add("usa");
+	        lista2.add("usamos");
+	        lista2.add("usais");
+	        lista2.add("usan");
+	        lista2.add("emplear");
+	        lista2.add("empleo");
+	        lista2.add("empleas");
+	        lista2.add("emplean");
+	        lista2.add("ampleamos");
+	        lista2.add("empleais");
+	        lista2.add("valor");
+	        lista2.add("muy");
+	        lista2.add("era");
+	        lista2.add("eras");
+	        lista2.add("eramos");
+	        lista2.add("eran");
+	        lista2.add("modo");
+	        lista2.add("bien");
+	        lista2.add("cual");
+	        lista2.add("cuando");
+	        lista2.add("donde");
+	        lista2.add("mientras");
+	        lista2.add("quien");
+	        lista2.add("con");
+	        lista2.add("entre");
+	        lista2.add("sin");
+	        lista2.add("trabajo");
+	        lista2.add("trabajar");
+	        lista2.add("trabajas");
+	        lista2.add("trabaja");
+	        lista2.add("trabajamos");
+	        lista2.add("trabajais");
+	        lista2.add("trabajan");
+	        lista2.add("podria");
+	        lista2.add("podrias");
+	        lista2.add("podriamos");
+	        lista2.add("podrian");
+	        lista2.add("podriais");
+	        lista2.add("yo");
+	        lista2.add("aquel");
+	        
+		
+	}
 	
 	
 	public static ConvertidorDeDatos getConvertidor() {
@@ -117,17 +483,19 @@ public class ConvertidorDeDatos {
 					lineaDeInteres[0] = apartados[4];
 				}
 				
+				// Recoger el cuarto campo porque este indica el idioma
+				
+				String idioma = apartados[3];
+				
 				// Tokenizar el texto
 				
-				lineaDeInteres[0] = this.tokenizar(lineaDeInteres[0]); 			
+				lineaDeInteres[0] = this.tokenizar(lineaDeInteres[0], idioma); 			
 				
 				// El segundo campo a recoger es el label puesto en el experimento, este siempre es el ultimo campo
 				
 				lineaDeInteres[1] = apartados[apartados.length-1];
 				
-				// Recoger el cuarto campo porque este indica el idioma
-				
-				String idioma = apartados[3];
+
 				
 				/* Dependiendo del idioma, las operaciones las hacemos sobre sus estructuras de datos correspondientes:
 				 
@@ -139,7 +507,7 @@ public class ConvertidorDeDatos {
 				
 				if (idioma.contentEquals("es")) {
 					escEs.writeNext(lineaDeInteres);
-					System.out.println("En Español -> "+lineaDeInteres[0]+" | "+lineaDeInteres[1]);
+		//			System.out.println("En Español -> "+lineaDeInteres[0]+" | "+lineaDeInteres[1]);
 					
 					
 					numPalabrasEsp.add(lineaDeInteres[0].split(" ").length);
@@ -274,7 +642,7 @@ public class ConvertidorDeDatos {
 	}
 	
 	
-	private String tokenizar (String frase) {
+	private String tokenizar (String frase, String idioma) {
 		
 		/*
 		  Pre: String
@@ -338,12 +706,8 @@ public class ConvertidorDeDatos {
 		s = s.replaceAll("[^\\S]'\\S", " ");
 
 
-
-
-		s = s.replaceAll("\\s+", " "); // Sustituir >1 espacios seguidos por un único espacio
-		s = s.replaceAll("^\\S*", ""); // Quitar los espacios al principio del string
-		
 		s = s.toLowerCase(); // Pasar a minuscula
+
 		
 		// Quitar tildes
 		
@@ -352,6 +716,45 @@ public class ConvertidorDeDatos {
 		s = s.replace('í', 'i');
 		s = s.replace('ó', 'o');
 		s = s.replace('ú', 'u');
+		
+		
+		// Quitar stopwords
+		
+		s = " " + s + " ";
+		
+		// " a b e " -> " a b e "
+		
+		if (idioma.contentEquals("es")) {
+			
+			for (String stopWord : this.lista2) {
+				s = s.replaceAll(" "+stopWord + " ", " ");
+				
+			}
+			
+		} else {
+
+			for (String stopWord : this.lista) {
+				s = s.replaceAll(" "+stopWord + " ", " ");
+				
+			}
+		}
+		
+		// REFERENCIA: https://www.ranks.nl/stopwords
+		
+
+		
+
+		s = s.replaceAll("\\s+", " "); // Sustituir >1 espacios seguidos por un único espacio
+		s = s.replaceAll("^\\S*", ""); // Quitar los espacios al principio del string
+		
+
+		
+
+
+
+		
+
+		
 		
 		return s;
 		
@@ -373,74 +776,7 @@ public class ConvertidorDeDatos {
 
 	}
 	
-	public void wordEmbedding() {
-		
-		//https://deeplearning4j.konduit.ai/v/en-1.0.0-beta6/language-processing/word2vec#just-give-me-the-code
-		
-		ArrayList<String> lista = new ArrayList<String>();
-		
-		
-		// TODO: AÑADIR STOPWORDS ESPAÑOLAS
-		// E INGLESAS AQUI, 
-		// REFERENCIA: https://www.ranks.nl/stopwords
-		
-		lista.add("a");
-		lista.add("about");
-		lista.add("above");
-		lista.add("after");
-		lista.add("again");
-		lista.add("against");
-		lista.add("all");
-		lista.add("am");
-		lista.add("an");
-		lista.add("and");
-		lista.add("any");
-		lista.add("are");
-		lista.add("aren't");
-		lista.add("as");
-		lista.add("at");
-		lista.add("be");
-		lista.add("because");
-		lista.add("been");
-		lista.add("before");
-		lista.add("being");
-		lista.add("below");
-		lista.add("between");
 
-
-		
-
-		
-	//	try {
-		
-
-		SentenceIterator iter = new LineSentenceIterator(new File("./datos/trainEsp.csv"));	
-			TokenizerFactory t = new DefaultTokenizerFactory();
-			t.setTokenPreProcessor(new CommonPreprocessor());
-			
-			System.out.println("entrenando");
-			
-			Word2Vec vec = new Word2Vec.Builder()
-			        .minWordFrequency(5)
-			        .layerSize(100)
-			        .seed(42)
-			        .windowSize(5)
-			        .iterate(iter)
-			        .tokenizerFactory(t)
-			        .stopWords(lista)
-			        .build();
-
-			vec.fit(); 
-			
-			
-			
-			System.out.println(vec.indexOf("mujer"));
-			
-	//	} catch (FileNotFoundException e) {
-	//		e.printStackTrace();
-	//	}
-
-	}
 	
 }
 

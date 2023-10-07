@@ -40,6 +40,6 @@ public class Main {
 
 	
 	public static void main (String args[]) {
-		ConvertidorDeDatos.getConvertidor().wordEmbedding();
+		ConvertidorDeDatos.getConvertidor().dividirDatosPorIdioma();
 	}
 }

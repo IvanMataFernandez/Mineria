@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -413,6 +414,8 @@ public class ConvertidorDeDatos {
 		
 		try {
 			
+			System.out.println("Leyendo archivo .csv ...");
+			
 			// Variables para calcular estadísticas de la muestra
 			
 			ArrayList<Integer> numPalabrasEsp = new ArrayList<Integer>();
@@ -420,20 +423,21 @@ public class ConvertidorDeDatos {
 			HashMap<String, Integer> numTargetsEsp = new HashMap<String, Integer>();
 			HashMap<String, Integer> numTargetsEng = new HashMap<String, Integer>();
 
+			Charset charset = Charset.forName("UTF-8");
 			
 			// Preparar el CSV de entrada para leer linea a linea
 			
-			Scanner sc = new Scanner(new File("."+File.separator+"datos"+File.separator+"EXIST2021_training.csv"));
+			Scanner sc = new Scanner(new File("."+File.separator+"datos"+File.separator+"EXIST2021_training.csv"), charset);
 			sc.useDelimiter("\n");
 			
 			// Preparar los descriptores para escribir ambos CSV de salida (el de Español e Ingles)
 			
 			File file = new File("."+File.separator+"datos"+File.separator+"trainEsp.csv");
-			FileWriter oFile = new FileWriter(file);
+			FileWriter oFile = new FileWriter(file, charset);
 			CSVWriter escEs = new CSVWriter(oFile); // Escribir a fichero de datos en Castellano
 			
 			file = new File("."+File.separator+"datos"+File.separator+"trainEng.csv");
-			oFile = new FileWriter(file);
+			oFile = new FileWriter(file, charset);
 			CSVWriter escEn = new CSVWriter(oFile); // Escribir a fichero de datos en Inglés
 		
 			// Escribir la cabecera de los CSV de salida
@@ -442,7 +446,9 @@ public class ConvertidorDeDatos {
 			escEs.writeNext(cabecera);
 			escEn.writeNext(cabecera);
 			
-			
+			System.out.println("Preprocesando...");
+
+			sc.next();
 			
 			while (sc.hasNext()) {
 				
@@ -495,6 +501,10 @@ public class ConvertidorDeDatos {
 				
 				lineaDeInteres[1] = apartados[apartados.length-1];
 				
+				// Eliminar el ultimo caracter que representa el salto de linea en si
+				
+				lineaDeInteres[1] = lineaDeInteres[1].substring(0, lineaDeInteres[1].length() - 1);
+
 
 				
 				/* Dependiendo del idioma, las operaciones las hacemos sobre sus estructuras de datos correspondientes:
@@ -545,6 +555,9 @@ public class ConvertidorDeDatos {
 			escEs.close();
 			escEn.close();
 			
+			System.out.println("¡Preproceso completado!");
+
+			
 			// Se han escrito los CSV, ahora computamos las estadísticas de estos
 			
 			// Primero con CSV con textos españoles
@@ -585,9 +598,11 @@ public class ConvertidorDeDatos {
 			}
 			
 			// Mostrar resultados
-			
-			System.out.println("Media de palabras en español por mensaje:"+media);
-			System.out.println("Desviación de palabras en español por mensaje:"+desviacion);
+			System.out.println("Estadísticas de las muestras obtenidas:");
+			System.out.println();
+			System.out.println("Idioma: Español");
+			System.out.println("Media de número de palabras por mensaje: "+media);
+			System.out.println("Desviación típica de palabraspor mensaje: "+desviacion);
 			System.out.print("Num Targets: "); this.imprimirLista(lista);
 			
 			// Ahora con CSV con textos ingleses
@@ -627,13 +642,19 @@ public class ConvertidorDeDatos {
 			
 			// Mostrar resultados
 			
-			System.out.println("Media de palabras en ingles por mensaje:"+media);
-			System.out.println("Desviación de palabras en ingles por mensaje:"+desviacion);
+			System.out.println();
+			System.out.println("Idioma: Ingles");
+			System.out.println("Media de número de palabras por mensaje: "+media);
+			System.out.println("Desviación típica de palabraspor mensaje: "+desviacion);
 			System.out.print("Num Targets: "); this.imprimirLista(lista);
+			
+			System.out.println();
+			System.out.println("Ejecución acabada. Recoge tus datos en la carpeta 'datos'. trainEng.csv contiene las instancias en ingles y trainEsp.csv las en español");
 
 			
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("¡ERROR! Pon EXIST2021_training.csv crea una carpeta llamada 'datos' en el mismo directorio que este jar y mete el archivo EXIST2021_training.csv en esa carpeta creada para poder realizar el preproceso");
+		//	e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -742,10 +763,14 @@ public class ConvertidorDeDatos {
 		// REFERENCIA: https://www.ranks.nl/stopwords
 		
 
+		// Eliminar primer y ultimo caracter, que son espaicos en blanco 
 		
 
+
 		s = s.replaceAll("\\s+", " "); // Sustituir >1 espacios seguidos por un único espacio
-		s = s.replaceAll("^\\S*", ""); // Quitar los espacios al principio del string
+
+	//	s = s.substring(1, s.length() - 1);
+		
 		
 
 		

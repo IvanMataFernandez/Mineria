@@ -442,7 +442,7 @@ public class ConvertidorDeDatos {
 		
 			// Escribir la cabecera de los CSV de salida
 			
-			String[] cabecera = {"Texto", "Target"};
+			String[] cabecera = {"Texto", "Target", "TextoOriginal"};
 			escEs.writeNext(cabecera);
 			escEn.writeNext(cabecera);
 			
@@ -458,7 +458,7 @@ public class ConvertidorDeDatos {
 				// Dividir por campos (en CSV se usa ',').
 				
 				String[] apartados = linea.split(",");
-				String[] lineaDeInteres = new String[2];
+				String[] lineaDeInteres = new String[3];
 				
 				// Al menos hay 7 campos, pueden haber mas si el texto incluye comas, si es el caso hay que reconstruirlo
 				
@@ -489,6 +489,8 @@ public class ConvertidorDeDatos {
 					lineaDeInteres[0] = apartados[4];
 				}
 				
+				lineaDeInteres[2] = lineaDeInteres[0]; // guardar el valor del texto original
+				
 				// Recoger el cuarto campo porque este indica el idioma
 				
 				String idioma = apartados[3];
@@ -517,7 +519,7 @@ public class ConvertidorDeDatos {
 				
 				if (idioma.contentEquals("es")) {
 					escEs.writeNext(lineaDeInteres);
-		//			System.out.println("En Español -> "+lineaDeInteres[0]+" | "+lineaDeInteres[1]);
+					System.out.println("En Español -> "+lineaDeInteres[0]+" | "+lineaDeInteres[1]);
 					
 					
 					numPalabrasEsp.add(lineaDeInteres[0].split(" ").length);
@@ -551,6 +553,40 @@ public class ConvertidorDeDatos {
 				
 				
 			}
+			
+			
+			System.out.println("Datos originales recogidos, ¿quieres añadir una instancia extra para analizarla después? 1 = Sí, 0 = No");
+			Scanner sc2 = new Scanner(System.in);
+			boolean resp = sc2.nextInt() == 1;
+			
+			if (resp) {
+				System.out.println("¿Lo vas a escribir en español? 1 = Sí, 0 = No");
+				boolean resp2 = sc2.nextInt() == 1;
+				sc2.nextLine();
+				
+				System.out.println("Introduce el texto a analizar:");
+				String texto = sc2.nextLine();
+				System.out.println("Introduce el label del texto:");
+				String label = sc2.nextLine();
+				
+				String[] input = new String[3];
+				input[2] = texto;
+				input[1] = label;
+				if (resp2) {
+					input[0] = this.tokenizar(texto, "es");
+
+					escEs.writeNext(input);
+
+				} else {
+					input[0] = this.tokenizar(texto, "en");
+
+					escEn.writeNext(input);
+
+				}
+				
+			}
+			
+			
 
 			escEs.close();
 			escEn.close();

@@ -217,10 +217,10 @@ public class ConvertidorDeDatos {
 	        lista2.add("uno");
 	        lista2.add("sobre");
 	        lista2.add("todo");
-	        lista2.add("también");
+	        lista2.add("tambien");
 	        lista2.add("tras");
 	        lista2.add("otro");
-	        lista2.add("algún");
+	        lista2.add("algun");
 	        lista2.add("alguno");
 	        lista2.add("alguna");
 	        lista2.add("algunos");
@@ -241,7 +241,7 @@ public class ConvertidorDeDatos {
 	        lista2.add("para");
 	        lista2.add("atras");
 	        lista2.add("porque");
-	        lista2.add("por qué");
+	        lista2.add("por que");
 	        lista2.add("estado");
 	        lista2.add("estaba");
 	        lista2.add("ante");
@@ -601,7 +601,7 @@ public class ConvertidorDeDatos {
 			// Calculo de media de palabras
 			
 			int suma = 0;
-			int cuadrados = 0;
+			double cuadrados = 0;
 			double media;
 			double desviacion;
 			
@@ -616,8 +616,10 @@ public class ConvertidorDeDatos {
 			
 
 			for (Integer num: numPalabrasEsp) {
-				cuadrados = cuadrados + (num-(int)media)^2;
+				cuadrados = cuadrados + Math.pow(num-media, 2);
 			}
+			
+			
 			
 			desviacion = (double) cuadrados / numPalabrasEsp.size();
 			desviacion = Math.sqrt(desviacion);
@@ -659,7 +661,7 @@ public class ConvertidorDeDatos {
 			// Calculo de desviación típica
 
 			for (Integer num: numPalabrasEng) {
-				cuadrados = cuadrados + (num-(int)media)^2;
+				cuadrados = cuadrados + Math.pow(num-media, 2);
 			}
 			
 			desviacion = (double) cuadrados / numPalabrasEng.size();

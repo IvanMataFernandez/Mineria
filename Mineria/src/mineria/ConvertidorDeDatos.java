@@ -517,38 +517,45 @@ public class ConvertidorDeDatos {
 				  
 				 */
 				
-				if (idioma.contentEquals("es")) {
-					escEs.writeNext(lineaDeInteres);
-					System.out.println("En Español -> "+lineaDeInteres[0]+" | "+lineaDeInteres[1]);
+				// Solo meter a la muestra frases que tengan 4 o mas tokens
+				if (lineaDeInteres[0].split(" ").length > 3) {
 					
-					
-					numPalabrasEsp.add(lineaDeInteres[0].split(" ").length);
-					
-					Integer cant = numTargetsEsp.get(lineaDeInteres[1]);
-					if (cant == null) {
-						numTargetsEsp.put(lineaDeInteres[1], 1);
+					if (idioma.contentEquals("es")) {
+						escEs.writeNext(lineaDeInteres);
+						System.out.println("En Español -> "+lineaDeInteres[0]+" | "+lineaDeInteres[1]);
+						
+						
+						numPalabrasEsp.add(lineaDeInteres[0].split(" ").length);
+						
+						Integer cant = numTargetsEsp.get(lineaDeInteres[1]);
+						if (cant == null) {
+							numTargetsEsp.put(lineaDeInteres[1], 1);
+						} else {
+							numTargetsEsp.put(lineaDeInteres[1], cant+1);	
+
+						}
+						
+
 					} else {
-						numTargetsEsp.put(lineaDeInteres[1], cant+1);	
+						escEn.writeNext(lineaDeInteres);
+						System.out.println("En Inglés -> "+lineaDeInteres[0]+" | "+lineaDeInteres[1]);
+						
+						
+						numPalabrasEng.add(lineaDeInteres[0].split(" ").length);
+						
+						Integer cant = numTargetsEng.get(lineaDeInteres[1]);
+						if (numTargetsEng.get(lineaDeInteres[1]) == null) {
+							numTargetsEng.put(lineaDeInteres[1], 1);
+						} else {
+							numTargetsEng.put(lineaDeInteres[1], cant+1);
+						}
 
+						
 					}
-					
-
-				} else {
-					escEn.writeNext(lineaDeInteres);
-					System.out.println("En Ingles -> "+lineaDeInteres[0]+" | "+lineaDeInteres[1]);
-					
-					
-					numPalabrasEng.add(lineaDeInteres[0].split(" ").length);
-					
-					Integer cant = numTargetsEng.get(lineaDeInteres[1]);
-					if (numTargetsEng.get(lineaDeInteres[1]) == null) {
-						numTargetsEng.put(lineaDeInteres[1], 1);
-					} else {
-						numTargetsEng.put(lineaDeInteres[1], cant+1);
-					}
-
-					
 				}
+				
+				
+
 				
 				
 				
@@ -681,7 +688,7 @@ public class ConvertidorDeDatos {
 			// Mostrar resultados
 			
 			System.out.println();
-			System.out.println("Idioma: Ingles");
+			System.out.println("Idioma: Inglés");
 			System.out.println("Media de número de palabras por mensaje: "+media);
 			System.out.println("Desviación típica de palabraspor mensaje: "+desviacion);
 			System.out.print("Num Targets: "); this.imprimirLista(lista);

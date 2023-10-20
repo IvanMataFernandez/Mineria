@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -389,6 +390,32 @@ public class ConvertidorDeDatos {
 	        lista2.add("yo");
 	        lista2.add("aquel");
 	        
+	        
+	        lista2.add("de");
+	        lista2.add("que");
+	        lista2.add("y");
+	        lista2.add("a");
+	        lista2.add("se");
+	        lista2.add("te");
+	        lista2.add("mas");
+	        lista2.add("son");
+	        lista2.add("le");
+	        lista2.add("q");
+	        lista2.add("tu");
+	        lista2.add("al");
+	        lista2.add("ni");
+	        lista2.add("del");
+	        lista2.add("o");
+	        lista2.add("son");
+	        lista2.add("hay");
+	        lista2.add("les");
+	        lista2.add("el");
+	        lista2.add("la");
+	        lista2.add("me");
+	        lista2.add("mi");
+
+
+	        
 		
 	}
 	
@@ -422,6 +449,7 @@ public class ConvertidorDeDatos {
 			ArrayList<Integer> numPalabrasEng = new ArrayList<Integer>();
 			HashMap<String, Integer> numTargetsEsp = new HashMap<String, Integer>();
 			HashMap<String, Integer> numTargetsEng = new HashMap<String, Integer>();
+			HashSet<String> yaRecogidos = new HashSet<String>();
 
 			Charset charset = Charset.forName("UTF-8");
 			
@@ -517,9 +545,10 @@ public class ConvertidorDeDatos {
 				  
 				 */
 				
-				// Solo meter a la muestra frases que tengan 4 o mas tokens
-				if (lineaDeInteres[0].split(" ").length > 3) {
-					
+				// Solo meter a la muestra frases que tengan 4 o mas tokens y que no se hayan recogido ya
+				// (puede haber tweets repetidos, si los hay, solo recoger el primer ejemplar)
+				if (lineaDeInteres[0].split(" ").length > 3 && !yaRecogidos.contains(lineaDeInteres[0])) {
+					yaRecogidos.add(lineaDeInteres[0]);
 					if (idioma.contentEquals("es")) {
 						escEs.writeNext(lineaDeInteres);
 						System.out.println("En Español -> "+lineaDeInteres[0]+" | "+lineaDeInteres[1]);
@@ -788,17 +817,30 @@ public class ConvertidorDeDatos {
 		
 		s = " " + s + " ";
 		
-		// " a b e " -> " a b e "
-		
+
 		if (idioma.contentEquals("es")) {
+			
+			// Repetir el bucle dos veces para que encuentre la misma stopword repetida dos veces seguida		
 			
 			for (String stopWord : this.lista2) {
 				s = s.replaceAll(" "+stopWord + " ", " ");
 				
 			}
 			
+			for (String stopWord : this.lista2) {
+				s = s.replaceAll(" "+stopWord + " ", " ");
+				
+			}
+			
+
+			
 		} else {
 
+			for (String stopWord : this.lista) {
+				s = s.replaceAll(" "+stopWord + " ", " ");
+				
+			}
+			
 			for (String stopWord : this.lista) {
 				s = s.replaceAll(" "+stopWord + " ", " ");
 				

@@ -454,7 +454,7 @@ public class ConvertidorDeDatos {
 	        lista2.add("ja");
 	        lista2.add("mucho");
 	        lista2.add("medio");
-	
+	        lista2.add("dias");
 	        
 		
 	}

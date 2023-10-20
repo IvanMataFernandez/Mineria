@@ -414,7 +414,47 @@ public class ConvertidorDeDatos {
 	        lista2.add("me");
 	        lista2.add("mi");
 
-
+	        lista2.add("hasta");
+	        lista2.add("este");
+	        lista2.add("cosas");
+	        lista2.add("tan");
+	        lista2.add("estas");
+	        lista2.add("haciendo");
+	        lista2.add("esto");
+	        lista2.add("ya");
+	        lista2.add("nada");
+	        lista2.add("esa");
+	        lista2.add("siempre");
+	        lista2.add("todos");
+	        lista2.add("eso");
+	        lista2.add("ella");
+	        lista2.add("ese");
+	        lista2.add("nadie");
+	        lista2.add("d");
+	        lista2.add("todas");
+	        lista2.add("ahora");
+	        lista2.add("dice");
+	        lista2.add("tus");
+	        lista2.add("otra");     
+	        lista2.add("sea");
+	        lista2.add("algo");
+	        lista2.add("estar");
+	        lista2.add("yyy");
+	        lista2.add("asi");
+	        lista2.add("he");
+	        lista2.add("dia");
+	        lista2.add("decir");
+	        lista2.add("han");
+	        lista2.add("hoy");
+	        lista2.add("dias");       
+	        lista2.add("igual");
+	        lista2.add("vez");
+	        lista2.add("da");
+	        lista2.add("pues");
+	        lista2.add("ja");
+	        lista2.add("mucho");
+	        lista2.add("medio");
+	
 	        
 		
 	}

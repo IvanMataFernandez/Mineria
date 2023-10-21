@@ -209,7 +209,53 @@ public class ConvertidorDeDatos {
 	        lista.add("yours");
 	        lista.add("yourself");
 	        lista.add("yourselves");
-		
+	        
+	        lista.add("amp");
+	        lista.add("just");
+	        lista.add("get");
+	        lista.add("gets");
+	        lista.add("one");
+	        lista.add("u");
+	        lista.add("will");
+	        lista.add("now");
+	        lista.add("say");
+	        lista.add("says");
+	        lista.add("got");
+	        lista.add("see");
+	        lista.add("sees");
+	        lista.add("know");
+	        lista.add("like");
+	        lista.add("day");
+	        lista.add("days");
+	        lista.add("y'all");
+	        lista.add("many");
+	        lista.add("still");
+	        lista.add("really");
+	        lista.add("us");
+	        lista.add("look");
+	        lista.add("looks");
+	        lista.add("even");
+	        lista.add("time");
+	        lista.add("never");
+	        lista.add("said");
+	        lista.add("go");
+	        lista.add("even");
+	        lista.add("thing");
+	        lista.add("always");
+	        lista.add("usually");
+	        lista.add("lot");
+	        lista.add("things");
+	        lista.add("lots");
+	        lista.add("every");
+	        lista.add("today");
+	        lista.add("think");
+	        lista.add("thinks");
+	        lista.add("every");
+	        lista.add("way");
+	        lista.add("much");
+	        lista.add("many");
+
+
 	      
 	        lista2.add("un");
 	        lista2.add("una");
@@ -413,7 +459,6 @@ public class ConvertidorDeDatos {
 	        lista2.add("la");
 	        lista2.add("me");
 	        lista2.add("mi");
-
 	        lista2.add("hasta");
 	        lista2.add("este");
 	        lista2.add("cosas");

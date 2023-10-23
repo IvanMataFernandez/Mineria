@@ -1,4 +1,6 @@
 package mineria;
+import java.util.Scanner;
+
 import weka.*;
 
 /*
@@ -40,6 +42,19 @@ public class Main {
 
 	
 	public static void main (String args[]) {
-		ConvertidorDeDatos.getConvertidor().dividirDatosPorIdioma();
+		
+		System.out.println("¿Quieres procesar la muestra train o añadir tus propios textos? 1 = Train, 0 = Propios");
+		Scanner sc2 = new Scanner(System.in);
+		boolean resp = sc2.nextInt() == 1;
+		
+		if (resp) {
+			ConvertidorDeDatos.getConvertidor().leerMuestraTrain();
+
+			
+		} else {
+			ConvertidorDeDatos.getConvertidor().añadirFrases();
+			
+		}
+		
 	}
 }

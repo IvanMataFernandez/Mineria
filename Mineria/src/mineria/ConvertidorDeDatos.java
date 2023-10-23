@@ -513,7 +513,56 @@ public class ConvertidorDeDatos {
 		return ConvertidorDeDatos.c;
 	}
 	
-	public void dividirDatosPorIdioma() {
+	
+	public void añadirFrases() {
+		
+		Scanner sc2 = new Scanner(System.in);
+		Charset charset = Charset.forName("UTF-8");
+		File file = new File("."+File.separator+"datos"+File.separator+"test.csv");
+	 	FileWriter oFile;
+		try {
+			oFile = new FileWriter(file, charset);
+			CSVWriter esc = new CSVWriter(oFile); // Escribir a fichero de datos en Inglés
+			
+			// Escribir la cabecera de los CSV de salida
+			
+			String[] cabecera = {"Texto", "TextoOriginal"};
+			esc.writeNext(cabecera);
+
+			boolean seguir = true;
+			
+			while (seguir) {	
+				System.out.println("Introduce el texto a analizar:");
+				String texto = sc2.nextLine();
+
+				
+				String[] input = new String[2];
+				input[1] = texto;
+
+				input[0] = this.tokenizar(texto, "es");
+				input[0] = this.tokenizar(input[0], "en");
+
+
+				esc.writeNext(input);
+
+				System.out.println("¿Deseas seguir añadiendo frases? 1 = Sí, 0 = No");
+				seguir = sc2.nextInt() == 1;
+				sc2.nextLine();
+				
+			}
+			
+			esc.close();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("Ejecución acabada. Recoge tus datos en la carpeta 'datos'.");
+
+		
+	}
+	
+	public void leerMuestraTrain() {
 		// Pre: EXIST2021_training.csv [test_case,id,source,language,text,task1,task2]
 		// Post: trainEsp.csv [text, task2], trainEng.csv [text, task2](una por idioma)
 		// Extra: - Calculo de media de palabras y desviacion tipica de ellas por lenguaje
@@ -676,36 +725,7 @@ public class ConvertidorDeDatos {
 			}
 			
 			
-			System.out.println("Datos originales recogidos, ¿quieres añadir una instancia extra para analizarla después? 1 = Sí, 0 = No");
-			Scanner sc2 = new Scanner(System.in);
-			boolean resp = sc2.nextInt() == 1;
-			
-			if (resp) {
-				System.out.println("¿Lo vas a escribir en español? 1 = Sí, 0 = No");
-				boolean resp2 = sc2.nextInt() == 1;
-				sc2.nextLine();
-				
-				System.out.println("Introduce el texto a analizar:");
-				String texto = sc2.nextLine();
-				System.out.println("Introduce el label del texto:");
-				String label = sc2.nextLine();
-				
-				String[] input = new String[3];
-				input[2] = texto;
-				input[1] = label;
-				if (resp2) {
-					input[0] = this.tokenizar(texto, "es");
 
-					escEs.writeNext(input);
-
-				} else {
-					input[0] = this.tokenizar(texto, "en");
-
-					escEn.writeNext(input);
-
-				}
-				
-			}
 			
 			
 

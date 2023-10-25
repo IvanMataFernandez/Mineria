@@ -771,8 +771,11 @@ public class ConvertidorDeDatos {
 			int i = 0;
 			
 			Integer[] lista = new Integer[numTargetsEsp.size()];
+			String [] lista2 = new String[numTargetsEng.size()];
+
 			for (Map.Entry<String, Integer> set : numTargetsEsp.entrySet()) {
 				lista[i] = set.getValue();
+				lista2[i] = set.getKey();
 				i++;
 			}
 			
@@ -782,7 +785,8 @@ public class ConvertidorDeDatos {
 			System.out.println("Idioma: Español");
 			System.out.println("Media de número de palabras por mensaje: "+media);
 			System.out.println("Desviación típica de palabraspor mensaje: "+desviacion);
-			System.out.print("Num Targets: "); this.imprimirLista(lista);
+			System.out.print("Num labels: "); this.imprimirLista(lista);
+			System.out.print("Labels: "); this.imprimirLista(lista2); 
 			
 			// Ahora con CSV con textos ingleses
 
@@ -813,8 +817,10 @@ public class ConvertidorDeDatos {
 			i = 0;
 			
 			lista = new Integer[numTargetsEng.size()];
+			lista2 = new String[numTargetsEng.size()];
 			for (Map.Entry<String, Integer> set : numTargetsEng.entrySet()) {
 				lista[i] = set.getValue();
+				lista2[i] = set.getKey();
 				i++;
 			}
 			
@@ -825,8 +831,9 @@ public class ConvertidorDeDatos {
 			System.out.println("Idioma: Inglés");
 			System.out.println("Media de número de palabras por mensaje: "+media);
 			System.out.println("Desviación típica de palabraspor mensaje: "+desviacion);
-			System.out.print("Num Targets: "); this.imprimirLista(lista);
-			
+			System.out.print("Num labels: "); this.imprimirLista(lista);
+			System.out.print("Labels: "); this.imprimirLista(lista2); 
+
 			System.out.println();
 			System.out.println("Ejecución acabada. Recoge tus datos en la carpeta 'datos'. trainEng.csv contiene las instancias en ingles y trainEsp.csv las en español");
 
@@ -978,14 +985,14 @@ public class ConvertidorDeDatos {
 	}
 	
 	
-	private void imprimirLista (Integer[] lista) {
+	private void imprimirLista (Object[] lista) {
 		
 		// Pre: puntero a lista no null
 		// Post: Imprimir la lista de forma legible al ser humano Y NO en forma de ID como hace java
 		//      Ej.  [1, 3, 4, 4,]
 		
 		System.out.print("[");
-		for (Integer num : lista) {
+		for (Object num : lista) {
 			System.out.print(num + ", ");
 		}
 		

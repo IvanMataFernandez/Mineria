@@ -584,6 +584,8 @@ public class ConvertidorDeDatos {
 			HashMap<String, Integer> numTargetsEsp = new HashMap<String, Integer>();
 			HashMap<String, Integer> numTargetsEng = new HashMap<String, Integer>();
 			HashSet<String> yaRecogidos = new HashSet<String>();
+			HashSet<String> yaRecogidosOG = new HashSet<String>(); 
+			HashMap<String, Integer> numRepetidosOG = new HashMap<String, Integer>();
 
 			Charset charset = Charset.forName("UTF-8");
 			
@@ -681,6 +683,7 @@ public class ConvertidorDeDatos {
 				
 				// Solo meter a la muestra frases que tengan 4 o mas tokens y que no se hayan recogido ya
 				// (puede haber tweets repetidos, si los hay, solo recoger el primer ejemplar)
+				
 				if (lineaDeInteres[0].split(" ").length > 3 && !yaRecogidos.contains(lineaDeInteres[0])) {
 					yaRecogidos.add(lineaDeInteres[0]);
 					if (idioma.contentEquals("es")) {
@@ -715,6 +718,21 @@ public class ConvertidorDeDatos {
 
 						
 					}
+				} 
+				
+				// Para estadísticas de tweets repetidos, contar los tweets.
+				
+				if (!yaRecogidosOG.contains(lineaDeInteres[2])) {
+					yaRecogidosOG.add(lineaDeInteres[2]);
+					
+				} else {
+					if (!numRepetidosOG.containsKey(lineaDeInteres[2])) {
+						numRepetidosOG.put(lineaDeInteres[2], 2);
+					} else {
+						numRepetidosOG.put(lineaDeInteres[2], numRepetidosOG.get(lineaDeInteres[2])+1);
+						
+					}
+					
 				}
 				
 				
@@ -780,11 +798,11 @@ public class ConvertidorDeDatos {
 			}
 			
 			// Mostrar resultados
-			System.out.println("Estadísticas de las muestras obtenidas:");
+			System.out.println("Estadísticas de las muestras tokenizadas obtenidas:");
 			System.out.println();
 			System.out.println("Idioma: Español");
-			System.out.println("Media de número de palabras por mensaje: "+media);
-			System.out.println("Desviación típica de palabraspor mensaje: "+desviacion);
+			System.out.println("Media de número de tokens por mensaje: "+media);
+			System.out.println("Desviación típica de tokens por mensaje: "+desviacion);
 			System.out.print("Num labels: "); this.imprimirLista(lista);
 			System.out.print("Labels: "); this.imprimirLista(lista2); 
 			
@@ -829,12 +847,41 @@ public class ConvertidorDeDatos {
 			
 			System.out.println();
 			System.out.println("Idioma: Inglés");
-			System.out.println("Media de número de palabras por mensaje: "+media);
-			System.out.println("Desviación típica de palabraspor mensaje: "+desviacion);
+			System.out.println("Media de número de tokens por mensaje: "+media);
+			System.out.println("Desviación típica de tokens por mensaje: "+desviacion);
 			System.out.print("Num labels: "); this.imprimirLista(lista);
 			System.out.print("Labels: "); this.imprimirLista(lista2); 
 
 			System.out.println();
+			
+			
+			// Mostrar cantidad de textos originales repetidos
+			
+			System.out.println("De la muestra original, se han encontrado los siguientes textos duplicados:");
+			
+			int[] cantDups = new int[12];
+			
+			for (i = 0; i != 4; i++) {
+				cantDups[i] = 0;
+			}
+			
+			for (Map.Entry<String, Integer> set : numRepetidosOG.entrySet()) {
+				cantDups[set.getValue()-2]++;
+			}
+			
+			for (i = 0; i != 12; i++) {
+				System.out.println("Cantidad de textos repetidos "+(i+2)+ " veces: "+cantDups[i]);
+			}			
+
+			
+			System.out.println("El texto repetido más veces es:");
+			
+			for (Map.Entry<String, Integer> set : numRepetidosOG.entrySet()) {
+				if (set.getValue() == 13) {
+					System.out.println(set.getKey());
+				}
+			}			
+			
 			System.out.println("Ejecución acabada. Recoge tus datos en la carpeta 'datos'. trainEng.csv contiene las instancias en ingles y trainEsp.csv las en español");
 
 			

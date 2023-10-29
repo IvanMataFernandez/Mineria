@@ -11,14 +11,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 
-import org.deeplearning4j.text.sentenceiterator.SentenceIterator;
-import org.deeplearning4j.text.tokenization.tokenizer.preprocessor.CommonPreprocessor;
-import org.deeplearning4j.models.word2vec.Word2Vec;
-import org.deeplearning4j.text.sentenceiterator.LineSentenceIterator;
-import org.deeplearning4j.text.tokenization.tokenizerfactory.TokenizerFactory;
-import org.nd4j.linalg.factory.Nd4j;
-import org.deeplearning4j.text.tokenization.tokenizerfactory.DefaultTokenizerFactory;
-
 import au.com.bytecode.opencsv.CSVWriter;
 
 public class ConvertidorDeDatos {

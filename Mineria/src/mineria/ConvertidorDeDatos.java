@@ -538,15 +538,16 @@ public class ConvertidorDeDatos {
 				esc.writeNext(input);
 
 				System.out.println("¿Deseas seguir añadiendo frases? 1 = Sí, 0 = No");
-				seguir = sc2.nextInt() == 1;
-				sc2.nextLine();
+				try {
+					seguir = sc2.nextInt() == 1;
+					sc2.nextLine();					
+				} catch (Exception e) {seguir = false;}
+
 				
 			}
 			
-			esc.close();
 			
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
 		}
 
 		System.out.println("Ejecución acabada. Recoge tus datos en la carpeta 'datos'.");
@@ -873,8 +874,8 @@ public class ConvertidorDeDatos {
 					System.out.println(set.getKey());
 				}
 			}			
-			
-			System.out.println("Ejecución acabada. Recoge tus datos en la carpeta 'datos'. trainEng.csv contiene las instancias en ingles y trainEsp.csv las en español");
+			System.out.println();
+			System.out.println("Ejecución acabada. Los archivos respectivos ya se han colocado en la carpeta 'datos'");
 
 			
 		} catch (FileNotFoundException e) {

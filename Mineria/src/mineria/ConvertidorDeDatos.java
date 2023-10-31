@@ -513,52 +513,71 @@ public class ConvertidorDeDatos {
 		File file = new File("."+File.separator+"datos"+File.separator+"test.csv");
 	 	FileWriter oFile;
 	 	CSVWriter esc = null;
-
-
-		try {
-			oFile = new FileWriter(file, charset);
-			esc = new CSVWriter(oFile); // Escribir a fichero de datos en Inglés
+	 	
+	 	System.out.println("Elige el idioma en el que vas a meter tweets: 0 = Español | 1 = Inglés | 2 = Otro");
+	 	
+	 	try {
+		 	
+	 		int resp = sc2.nextInt();
+	 		sc2.nextLine();
+		 	String idioma;
+	 		if (resp == 0) {
+	 			idioma = "es";
+	 		} else if (resp == 1) {
+	 			idioma = "en";
+	 		} else {
+	 			idioma = "x";
+	 		}
+	 		
+		 	
 			
-			// Escribir la cabecera de los CSV de salida
-			
-			String[] cabecera = {"Texto", "TextoOriginal"};
-			esc.writeNext(cabecera);
 
-			boolean seguir = true;
-			
-			while (seguir) {	
-				System.out.println("Introduce el texto a analizar:");
-				String texto = sc2.nextLine();
-
+			try {
+				oFile = new FileWriter(file, charset);
+				esc = new CSVWriter(oFile); // Escribir a fichero de datos en Inglés
 				
-				String[] input = new String[2];
-				input[1] = texto;
-
-				input[0] = this.tokenizar(texto, "es");
-				input[0] = this.tokenizar(input[0], "en");
-
-
-				esc.writeNext(input);
-
-				System.out.println("¿Deseas seguir añadiendo frases? 1 = Sí, 0 = No");
-			    seguir = sc2.nextInt() == 1;
-			    sc2.nextLine();					
-
+				// Escribir la cabecera de los CSV de salida
 				
+				String[] cabecera = {"Texto", "TextoOriginal"};
+				esc.writeNext(cabecera);
+
+				boolean seguir = true;
+				
+				while (seguir) {	
+					System.out.println("Introduce el texto a analizar:");
+					String texto = sc2.nextLine();
+
+					
+					String[] input = new String[2];
+					input[1] = texto;
+
+					input[0] = this.tokenizar(texto, idioma);
+
+
+					esc.writeNext(input);
+
+					System.out.println("¿Deseas seguir añadiendo frases? 1 = Sí, 0 = No");
+				    seguir = sc2.nextInt() == 1;
+				    sc2.nextLine();					
+
+					
+				}
+				
+				
+			} catch (Exception e) {}
+
+			
+			try {
+				esc.close();
+			} catch (IOException e) {
+
 			}
 			
-			
-		} catch (IOException e) {}
 
-		
-		try {
-			esc.close();
-		} catch (IOException e) {
-
-		}
-		
-
-		System.out.println("Ejecución acabada. Se han guardado las instancias en el fichero 'test.csv' dentro de la carpeta 'datos'.");
+			System.out.println("Ejecución acabada. Se han guardado las instancias en el fichero 'test.csv' dentro de la carpeta 'datos'.");
+		 	
+	 		
+	 	} catch (Exception e) {	System.out.println("ERROR: valor no númerico dado, abortando...");}
 
 		
 	}
@@ -982,6 +1001,8 @@ public class ConvertidorDeDatos {
 			
 			// Repetir el bucle dos veces para que encuentre la misma stopword repetida dos veces seguida		
 			
+			
+			
 			for (String stopWord : this.lista2) {
 				s = s.replaceAll(" "+stopWord + " ", " ");
 				
@@ -994,7 +1015,8 @@ public class ConvertidorDeDatos {
 			
 
 			
-		} else {
+		} else if (idioma.contentEquals("en")) {
+
 
 			for (String stopWord : this.lista) {
 				s = s.replaceAll(" "+stopWord + " ", " ");

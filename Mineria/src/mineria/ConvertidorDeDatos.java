@@ -512,9 +512,12 @@ public class ConvertidorDeDatos {
 		Charset charset = Charset.forName("UTF-8");
 		File file = new File("."+File.separator+"datos"+File.separator+"test.csv");
 	 	FileWriter oFile;
+	 	CSVWriter esc = null;
+
+
 		try {
 			oFile = new FileWriter(file, charset);
-			CSVWriter esc = new CSVWriter(oFile); // Escribir a fichero de datos en Inglés
+			esc = new CSVWriter(oFile); // Escribir a fichero de datos en Inglés
 			
 			// Escribir la cabecera de los CSV de salida
 			
@@ -538,19 +541,24 @@ public class ConvertidorDeDatos {
 				esc.writeNext(input);
 
 				System.out.println("¿Deseas seguir añadiendo frases? 1 = Sí, 0 = No");
-				try {
-					seguir = sc2.nextInt() == 1;
-					sc2.nextLine();					
-				} catch (Exception e) {seguir = false;}
+			    seguir = sc2.nextInt() == 1;
+			    sc2.nextLine();					
 
 				
 			}
 			
 			
-		} catch (Exception e) {
-		}
+		} catch (IOException e) {}
 
-		System.out.println("Ejecución acabada. Recoge tus datos en la carpeta 'datos'.");
+		
+		try {
+			esc.close();
+		} catch (IOException e) {
+
+		}
+		
+
+		System.out.println("Ejecución acabada. Se han guardado las instancias en el fichero 'test.csv' dentro de la carpeta 'datos'.");
 
 		
 	}

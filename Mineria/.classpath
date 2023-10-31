@@ -7,13 +7,5 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Elsab/Desktop/repoMin/Mineria/lib/opencsv-2.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Elsab/Desktop/repoMin/Mineria/lib/weka-stable-3.8.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Elsab/Desktop/repoMin/Mineria/lib/commons-io-2.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Elsab/Desktop/repoMin/Mineria/lib/slf4j-api-1.7.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Elsab/Desktop/repoMin/Mineria/lib/slf4j-jdk14-1.7.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Elsab/Desktop/repoMin/Mineria/lib/deeplearning4j-nlp-1.0.0-M2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Elsab/Desktop/repoMin/Mineria/lib/nd4j-api-1.0.0-M2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Elsab/Desktop/repoMin/Mineria/lib/nd4j-common-1.0.0-M2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Elsab/Desktop/repoMin/Mineria/lib/nd4j-native-api-1.0.0-M2.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
